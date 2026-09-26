@@ -119,9 +119,7 @@ class ImageHash:
 
 	def __ne__(self, other):
 		# type: (object) -> bool
-		if other is None:
-			return False
-		return not numpy.array_equal(self.hash.flatten(), other.hash.flatten())  # type: ignore
+		return not self.__eq__(other)
 
 	def __hash__(self):
 		# this returns a 8 bit integer, intentionally shortening the information
@@ -464,7 +462,7 @@ class ImageMultiHash:
 
 	def __ne__(self, other):
 		# type: (object) -> bool
-		return not self.matches(other)  # type: ignore
+		return not self.__eq__(other)
 
 	def __sub__(self, other, hamming_cutoff=None, bit_error_rate=None):
 		# type: (ImageMultiHash, float | None, float | None) -> float
